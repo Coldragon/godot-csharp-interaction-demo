@@ -3,7 +3,9 @@ using System;
 
 public class Levier : InteractiveItem
 {
-	
+	[Export]
+	NodePath openable_item;
+	OpenableItem oi;
 	AnimationPlayer ap;
 	OmniLight ol;
 	public bool _activated = false;
@@ -12,6 +14,7 @@ public class Levier : InteractiveItem
 	{
 		ap = GetNode<AnimationPlayer>("AnimationPlayer");
 		ol = GetNode<OmniLight>("OmniLight");
+		oi = GetNode<OpenableItem>(openable_item);
 	}
 	
 	public override void Interact(Player player)
@@ -28,11 +31,15 @@ public class Levier : InteractiveItem
 			{
 				ap.Play("Activate");
 				ol.LightColor = Colors.Green;
+				if(oi != null)
+					oi.Open();
 			}
 			else
 			{
 				ap.PlayBackwards("Activate");
 				ol.LightColor = Colors.Red;
+				if(oi != null)
+					oi.Close();
 			}
 			_activated = new_state;
 		}
