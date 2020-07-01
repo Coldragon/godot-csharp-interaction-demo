@@ -2,16 +2,15 @@
 
 [ext_resource path="res://Scenes/InteractiveItem/Levier/Levier.cs" type="Script" id=1]
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.607843, 0.607843, 0.607843, 1 )
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 1, 0.660562, 0.433585 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "Activate"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
-tracks/0/path = NodePath("CSGBox2:rotation_degrees")
+tracks/0/path = NodePath("Levier:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -20,33 +19,37 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, -40.489 ), Vector3( 0, 0, 50.136 ) ]
+"values": [ Vector3( 0, 0, -60 ), Vector3( 0, 0, 60 ) ]
 }
 
 [node name="Levier" type="Area"]
 script = ExtResource( 1 )
 
 [node name="CSGBox" type="CSGBox" parent="."]
-material_override = SubResource( 3 )
+material_override = SubResource( 1 )
 width = 1.55603
 height = 0.806388
 depth = 0.462612
 
-[node name="CSGBox2" type="CSGBox" parent="."]
-transform = Transform( 0.760531, 0.649302, 0, -0.649302, 0.760531, 0, 0, 0, 1, 0, 0.540191, 0 )
+[node name="Levier" type="Spatial" parent="."]
+transform = Transform( 0.5, 0.866026, 0, -0.866026, 0.5, 0, 0, 0, 1, 0, 0.271003, 0 )
+
+[node name="CSGBox2" type="CSGBox" parent="Levier"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0170342, 0.552795, 0 )
 width = 0.199099
-height = 1.77049
+height = 1.1284
 depth = 0.176646
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.821899, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.943471, 0.00767672 )
 light_color = Color( 1, 0, 0, 1 )
-light_energy = 10.0
-omni_range = 1.42554
+light_energy = 5.0
+light_indirect_energy = 5.0
+omni_range = 1.01576
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Activate = SubResource( 2 )
+anims/Activate = SubResource( 3 )

@@ -3,20 +3,13 @@ using System;
 
 public class Player : KinematicBody
 {
- [Export]
-	public float Gravity = -24.8f;
-	[Export]
-	public float MaxSpeed = 20.0f;
-	[Export]
-	public float JumpSpeed = 18.0f;
-	[Export]
-	public float Accel = 4.5f;
-	[Export]
-	public float Deaccel = 16.0f;
-	[Export]
-	public float MaxSlopeAngle = 40.0f;
-	[Export]
-	public float MouseSensitivity = 0.05f;
+ 	[Export] public float Gravity = -24.8f;
+	[Export] public float MaxSpeed = 20.0f;
+	[Export] public float JumpSpeed = 18.0f;
+	[Export] public float Accel = 4.5f;
+	[Export] public float Deaccel = 16.0f;
+	[Export] public float MaxSlopeAngle = 40.0f;
+	[Export] public float MouseSensitivity = 0.05f;
 
 	private Vector3 _vel = new Vector3();
 	private Vector3 _dir = new Vector3();
@@ -26,7 +19,6 @@ public class Player : KinematicBody
 	private RayCast _raycast;
 	private TextureRect _interact_icon;
 	
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_camera = GetNode<Camera>("Rotation_Helper/Camera");
@@ -91,10 +83,6 @@ public class Player : KinematicBody
 			if (Input.IsActionJustPressed("movement_jump"))
 				_vel.y = JumpSpeed;
 		}
-		//  -------------------------------------------------------------------
-
-		//  -------------------------------------------------------------------
-		//  Capturing/Freeing the cursor
 		if (Input.IsActionJustPressed("ui_cancel"))
 		{
 			if (Input.GetMouseMode() == Input.MouseMode.Visible)
@@ -102,7 +90,6 @@ public class Player : KinematicBody
 			else
 				Input.SetMouseMode(Input.MouseMode.Visible);
 		}
-		//  -------------------------------------------------------------------
 	}
 
 	private void ProcessMovement(float delta)

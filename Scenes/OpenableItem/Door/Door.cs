@@ -19,14 +19,12 @@ public class Door : OpenableItem
 	
 	public override void Close()
 	{
-		GD.Print("Closing" + Name);
 		tw.InterpolateProperty(this, "transform:origin", Transform.origin, initial_position, duration);
 		tw.Start();
 	}
 
 	public override void Open()
 	{
-		GD.Print("Openning" + Name);
 		tw.InterpolateProperty(this, "transform:origin", Transform.origin, initial_position+openning_offset, duration);
 		tw.Start();
 	}

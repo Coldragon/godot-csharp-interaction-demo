@@ -19,7 +19,6 @@ public class Levier : InteractiveItem
 	
 	public override void Interact(Player player)
 	{
-		GD.Print(player.Name + "interacted with " + Name);
 		SetAnimation(!_activated);
 	}
 	
@@ -31,6 +30,13 @@ public class Levier : InteractiveItem
 			{
 				ap.Play("Activate");
 				ol.LightColor = Colors.Green;
+				
+				Color col = Colors.Green;
+				col.a = 0.5f;
+				foreach(Node node in GetTree().GetNodesInGroup("lever1_open"))
+					if(node is LightVarying nodecast)
+						nodecast.CurrentColor = col;
+
 				if(oi != null)
 					oi.Open();
 			}
@@ -38,9 +44,17 @@ public class Levier : InteractiveItem
 			{
 				ap.PlayBackwards("Activate");
 				ol.LightColor = Colors.Red;
+				
+				Color col = Colors.Red;
+				col.a = 0.5f;
+				foreach(Node node in GetTree().GetNodesInGroup("lever1_open"))
+					if(node is LightVarying nodecast)
+						nodecast.CurrentColor = col;
+
 				if(oi != null)
 					oi.Close();
 			}
+
 			_activated = new_state;
 		}
 	}
