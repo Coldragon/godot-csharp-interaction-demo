@@ -115,11 +115,11 @@ material = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42.6336, 4.55578, 41.4506 )
 
 [node name="LightVarying2" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42.6336, 4.55578, -39.013 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4425, 4.55578, -44.8166 )
 current_color = Color( 0, 0.227451, 1, 1 )
 
 [node name="LightVarying3" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.4746, 4.55578, -39.013 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.0742, 4.55578, -44.9632 )
 current_color = Color( 0, 1, 0.156863, 1 )
 
 [node name="LightVarying4" parent="." instance=ExtResource( 4 )]

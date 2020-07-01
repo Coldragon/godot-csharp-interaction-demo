@@ -24,6 +24,7 @@ public class Player : KinematicBody
 	private Camera _camera;
 	private Spatial _rotationHelper;
 	private RayCast _raycast;
+	private TextureRect _interact_icon;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -31,6 +32,7 @@ public class Player : KinematicBody
 		_camera = GetNode<Camera>("Rotation_Helper/Camera");
 		_rotationHelper = GetNode<Spatial>("Rotation_Helper");
 		_raycast = GetNode<RayCast>("Rotation_Helper/Camera/RayCast");
+		_interact_icon = GetNode<TextureRect>("PlayerUI/Interract");
 		Input.SetMouseMode(Input.MouseMode.Captured);
 	}
 
@@ -43,9 +45,18 @@ public class Player : KinematicBody
 
 	private void ProcessInteraction(float delta)
 	{
-		if(Input.IsActionJustPressed("left_click"))
-			if(_raycast.GetCollider() is InteractiveItem collider)
+		if(_raycast.GetCollider() is InteractiveItem collider)
+		{
+			if(Input.IsActionJustPressed("interract"))
+			{
 				collider.Interact(this);
+			}
+			_interact_icon.Show();
+		}
+		else
+		{
+			_interact_icon.Hide();
+		}
 	}
 
 	private void ProcessInput(float delta)

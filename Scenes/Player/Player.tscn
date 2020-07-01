@@ -18,7 +18,7 @@ far = 1024.0
 
 [node name="RayCast" type="RayCast" parent="Rotation_Helper/Camera"]
 enabled = true
-cast_to = Vector3( 0, 0, -4 )
+cast_to = Vector3( 0, 0, -5 )
 collide_with_areas = true
 collide_with_bodies = false
 
