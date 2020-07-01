@@ -145,15 +145,18 @@ material = SubResource( 4 )
 
 [node name="CSGBox" type="CSGBox" parent="Walls"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2123, -33.053 )
+use_collision = true
 width = 3.41471
 height = 8.80603
 material = SubResource( 5 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -0.455048, 0.890467, 0, -0.890467, -0.455048, 0, -2.85966, 0 )
-light_indirect_energy = 0.0
+light_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+light_energy = 0.1
 shadow_enabled = true
-directional_shadow_mode = 1
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 512.0
 
 [node name="LightVarying" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.6601, 3.62919, 45.9306 )
