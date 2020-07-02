@@ -58,10 +58,12 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Scenes\InteractiveItem\Levier\Levier.cs" />
+    <Compile Include="Scenes\InteractiveItem\TriggerOnOffItems\Levier\Levier.cs" />
     <Compile Include="Scenes\InteractiveItem\InteractiveItem.cs" />
-    <Compile Include="Scenes\OpenableItem\Door\Door.cs" />
-    <Compile Include="Scenes\OpenableItem\OpenableItem.cs" />
+    <Compile Include="Scenes\InteractiveItem\TriggerOnOffItems\TriggerOnOffItems.cs" />
+    <Compile Include="Scenes\OnOffTriggerableItem\Door\Door.cs" />
+    <Compile Include="Scenes\OnOffTriggerableItem\LightSwitchable\LightSwitchable.cs" />
+    <Compile Include="Scenes\OnOffTriggerableItem\OnOffTriggerableItem.cs" />
     <Compile Include="Scenes\Player\Player.cs" />
     <Compile Include="Scenes\LightVarying\LightVarying.cs" />
     <Compile Include="Scenes\World\World.cs" />

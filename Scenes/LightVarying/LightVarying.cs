@@ -1,9 +1,8 @@
 using Godot;
 using System;
 
-public class LightVarying : Godot.StaticBody
+public class LightVarying : Godot.Spatial
 {
-	// Color
 	private Color current_color = new Color(1.0f,0.0f,0.0f,1.0f);
 	[Export]
 	public Color CurrentColor
@@ -30,12 +29,6 @@ public class LightVarying : Godot.StaticBody
 			light.LightColor = current_color;
 		}
 	}
-	
-	public void GetChildsReferences()
-	{
-		light = GetNode<OmniLight>("OmniLight");
-		particles = GetNode<Particles>("Particles");
-	}
 
 	public void DuplicateRessources()
 	{
@@ -47,7 +40,8 @@ public class LightVarying : Godot.StaticBody
 
 	public override void _Ready()
 	{
-		GetChildsReferences();
+		light = GetNode<OmniLight>("OmniLight");
+		particles = GetNode<Particles>("Particles");
 		DuplicateRessources();
 		UpdateColor();
 	}

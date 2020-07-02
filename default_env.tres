@@ -2,8 +2,8 @@
 
 [sub_resource type="ProceduralSky" id=1]
 radiance_size = 3
-sky_top_color = Color( 0.32, 0.1024, 0.1024, 1 )
-sky_horizon_color = Color( 0.53, 0.520283, 0.2385, 1 )
+sky_top_color = Color( 0.66, 0.0792, 0.0792, 1 )
+sky_horizon_color = Color( 0.717647, 0.603922, 0.160784, 1 )
 sky_curve = 0.545657
 sky_energy = 0.15
 sun_color = Color( 0.0705882, 0.0666667, 0.0627451, 1 )

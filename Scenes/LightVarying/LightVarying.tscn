@@ -31,7 +31,7 @@ emission_on_uv2 = false
 [sub_resource type="SphereMesh" id=5]
 material = SubResource( 4 )
 
-[node name="LightVarying" type="StaticBody"]
+[node name="LightVarying" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
@@ -44,8 +44,3 @@ amount = 512
 lifetime = 1.25
 process_material = SubResource( 3 )
 draw_pass_1 = SubResource( 5 )
-
-[node name="CSGBox" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.68702, 0 )
-use_collision = true
-height = 3.87288
