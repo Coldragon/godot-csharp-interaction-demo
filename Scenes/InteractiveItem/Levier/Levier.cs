@@ -3,9 +3,8 @@ using System;
 
 public class Levier : InteractiveItem
 {
-	[Export]
-	NodePath openable_item;
-	OpenableItem oi;
+	[Export] Godot.Collections.Array<NodePath> openable_items_path = new Godot.Collections.Array<NodePath>();
+	Godot.Collections.Array<OpenableItem> openable_items_nodes =  new Godot.Collections.Array<OpenableItem>();
 	AnimationPlayer ap;
 	OmniLight ol;
 	public bool _activated = false;
@@ -14,7 +13,12 @@ public class Levier : InteractiveItem
 	{
 		ap = GetNode<AnimationPlayer>("AnimationPlayer");
 		ol = GetNode<OmniLight>("OmniLight");
-		oi = GetNode<OpenableItem>(openable_item);
+		foreach(NodePath path in openable_items_path)
+		{
+			Node node = GetNode(path);
+			if(node is OpenableItem castnode)
+				openable_items_nodes.Add(castnode);
+		}
 	}
 	
 	public override void Interact(Player player)
@@ -37,7 +41,7 @@ public class Levier : InteractiveItem
 					if(node is LightVarying nodecast)
 						nodecast.CurrentColor = col;
 
-				if(oi != null)
+				foreach(OpenableItem oi in openable_items_nodes)
 					oi.Open();
 			}
 			else
@@ -51,7 +55,7 @@ public class Levier : InteractiveItem
 					if(node is LightVarying nodecast)
 						nodecast.CurrentColor = col;
 
-				if(oi != null)
+				foreach(OpenableItem oi in openable_items_nodes)
 					oi.Close();
 			}
 
