@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-abstract public class InteractiveItem : Area
+public abstract class InteractiveItem : Area
 {
-	abstract public void Interact(Player player);
+	public abstract void Interact(Player player);
 }

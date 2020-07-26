@@ -109,7 +109,6 @@ depth = 1.5
 
 [node name="DoorLeft" parent="Room1" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 11.3337, -51.244 )
-openning_offset = Vector3( -13, 0, 0 )
 
 [node name="KinematicBody" type="KinematicBody" parent="Room1/DoorLeft"]
 
@@ -125,7 +124,6 @@ material = SubResource( 2 )
 
 [node name="DoorRight" parent="Room1" instance=ExtResource( 6 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.9862, 11.3337, -51.244 )
-openning_offset = Vector3( 13, 0, 0 )
 
 [node name="KinematicBody" type="KinematicBody" parent="Room1/DoorRight"]
 
@@ -189,7 +187,7 @@ material = SubResource( 4 )
 
 [node name="Levier" parent="Room1" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 0, -1, -1, -4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1.91069e-15, 0.143227, 5.54567, -32.0128 )
-openable_items_path = [ NodePath("../DoorLeft"), NodePath("../DoorRight"), NodePath("../LigthSwitchable"), NodePath("../LigthSwitchable2") ]
+OpenableItemsPath = [ NodePath("../DoorLeft/KinematicBody"), NodePath("../DoorRight/KinematicBody") ]
 
 [node name="CSGBox" type="CSGBox" parent="Room1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2123, -105.422 )
@@ -303,7 +301,6 @@ material = SubResource( 4 )
 
 [node name="Levier2" parent="Room2" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 0, -1, -1, -4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1.91069e-15, 0.143227, 5.54567, -6.00679 )
-openable_items_path = [ NodePath("../Stair"), NodePath("../Stair2"), NodePath("../Stair3"), NodePath("../Stair4"), NodePath("../Stair5"), NodePath("../Stair6"), NodePath("../Stair7") ]
 
 [node name="CSGBox4" type="CSGBox" parent="Room2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2123, 65.3626 )
@@ -314,7 +311,6 @@ material = SubResource( 5 )
 
 [node name="Stair" parent="Room2" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -32.573 )
-openning_offset = Vector3( 0, 2.4, 0 )
 
 [node name="KinematicBody" type="KinematicBody" parent="Room2/Stair"]
 
@@ -327,7 +323,6 @@ shape = SubResource( 9 )
 
 [node name="Stair2" parent="Room2" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -35.488 )
-openning_offset = Vector3( 0, 4.4, 0 )
 
 [node name="KinematicBody" type="KinematicBody" parent="Room2/Stair2"]
 
@@ -340,7 +335,6 @@ shape = SubResource( 9 )
 
 [node name="Stair3" parent="Room2" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -38.305 )
-openning_offset = Vector3( 0, 6.4, 0 )
 
 [node name="KinematicBody" type="KinematicBody" parent="Room2/Stair3"]
 
@@ -353,7 +347,6 @@ shape = SubResource( 9 )
 
 [node name="Stair4" parent="Room2" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -41.265 )
-openning_offset = Vector3( 0, 8.4, 0 )
 
 [node name="KinematicBody" type="KinematicBody" parent="Room2/Stair4"]
 
@@ -366,7 +359,6 @@ shape = SubResource( 9 )
 
 [node name="Stair5" parent="Room2" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -44.195 )
-openning_offset = Vector3( 0, 10.4, 0 )
 
 [node name="KinematicBody" type="KinematicBody" parent="Room2/Stair5"]
 
@@ -379,7 +371,6 @@ shape = SubResource( 9 )
 
 [node name="Stair6" parent="Room2" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -47.186 )
-openning_offset = Vector3( 0, 12.4, 0 )
 
 [node name="KinematicBody" type="KinematicBody" parent="Room2/Stair6"]
 
@@ -392,7 +383,6 @@ shape = SubResource( 9 )
 
 [node name="Stair7" parent="Room2" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.5513, -75.892 )
-openning_offset = Vector3( 0, -20, 0 )
 
 [node name="KinematicBody" type="KinematicBody" parent="Room2/Stair7"]
 

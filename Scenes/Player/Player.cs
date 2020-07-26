@@ -17,14 +17,14 @@ public class Player : KinematicBody
 	private Camera _camera;
 	private Spatial _rotationHelper;
 	private RayCast _raycast;
-	private TextureRect _interact_icon;
+	private TextureRect _interactIcon;
 	
 	public override void _Ready()
 	{
 		_camera = GetNode<Camera>("Rotation_Helper/Camera");
 		_rotationHelper = GetNode<Spatial>("Rotation_Helper");
 		_raycast = GetNode<RayCast>("Rotation_Helper/Camera/RayCast");
-		_interact_icon = GetNode<TextureRect>("PlayerUI/Interract");
+		_interactIcon = GetNode<TextureRect>("PlayerUI/Interract");
 		Input.SetMouseMode(Input.MouseMode.Captured);
 	}
 
@@ -43,23 +43,18 @@ public class Player : KinematicBody
 			{
 				collider.Interact(this);
 			}
-			_interact_icon.Show();
+			_interactIcon.Show();
 		}
 		else
-		{
-			_interact_icon.Hide();
-		}
+			_interactIcon.Hide();
 	}
 
 	private void ProcessInput(float delta)
 	{
-		//  -------------------------------------------------------------------
-		//  Walking
 		_dir = new Vector3();
-		Transform camXform = _camera.GlobalTransform;
-
-		Vector2 inputMovementVector = new Vector2();
-
+		var camXform = _camera.GlobalTransform;
+		var inputMovementVector = new Vector2();
+		
 		if (Input.IsActionPressed("movement_forward"))
 			inputMovementVector.y += 1;
 		if (Input.IsActionPressed("movement_backward"))
@@ -68,28 +63,19 @@ public class Player : KinematicBody
 			inputMovementVector.x -= 1;
 		if (Input.IsActionPressed("movement_right"))
 			inputMovementVector.x += 1;
-
+		
 		inputMovementVector = inputMovementVector.Normalized();
-
-		// Basis vectors are already normalized.
 		_dir += -camXform.basis.z * inputMovementVector.y;
 		_dir += camXform.basis.x * inputMovementVector.x;
-		//  -------------------------------------------------------------------
-
-		//  -------------------------------------------------------------------
-		//  Jumping
+		
 		if (IsOnFloor())
-		{
 			if (Input.IsActionJustPressed("movement_jump"))
 				_vel.y = JumpSpeed;
-		}
-		if (Input.IsActionJustPressed("ui_cancel"))
-		{
-			if (Input.GetMouseMode() == Input.MouseMode.Visible)
-				Input.SetMouseMode(Input.MouseMode.Captured);
-			else
-				Input.SetMouseMode(Input.MouseMode.Visible);
-		}
+		
+		if (!Input.IsActionJustPressed("ui_cancel")) return;
+		Input.SetMouseMode(Input.GetMouseMode() == Input.MouseMode.Visible
+			? Input.MouseMode.Captured
+			: Input.MouseMode.Visible);
 	}
 
 	private void ProcessMovement(float delta)
@@ -99,18 +85,14 @@ public class Player : KinematicBody
 
 		_vel.y += delta * Gravity;
 
-		Vector3 hvel = _vel;
+		var hvel = _vel;
 		hvel.y = 0;
 
-		Vector3 target = _dir;
+		var target = _dir;
 
 		target *= MaxSpeed;
 
-		float accel;
-		if (_dir.Dot(hvel) > 0)
-			accel = Accel;
-		else
-			accel = Deaccel;
+		var accel = _dir.Dot(hvel) > 0 ? Accel : Deaccel;
 
 		hvel = hvel.LinearInterpolate(target, accel * delta);
 		_vel.x = hvel.x;
@@ -120,15 +102,12 @@ public class Player : KinematicBody
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event is InputEventMouseMotion && Input.GetMouseMode() == Input.MouseMode.Captured)
-		{
-			InputEventMouseMotion mouseEvent = @event as InputEventMouseMotion;
-			_rotationHelper.RotateX(Mathf.Deg2Rad(-mouseEvent.Relative.y * MouseSensitivity));
-			RotateY(Mathf.Deg2Rad(-mouseEvent.Relative.x * MouseSensitivity));
-
-			Vector3 cameraRot = _rotationHelper.RotationDegrees;
-			cameraRot.x = Mathf.Clamp(cameraRot.x, -89, 89);
-			_rotationHelper.RotationDegrees = cameraRot;
-		}
+		if (!(@event is InputEventMouseMotion mouseEvent) || Input.GetMouseMode() != Input.MouseMode.Captured) return;
+		
+		_rotationHelper.RotateX(Mathf.Deg2Rad(-mouseEvent.Relative.y * MouseSensitivity));
+		RotateY(Mathf.Deg2Rad(-mouseEvent.Relative.x * MouseSensitivity));
+		var cameraRot = _rotationHelper.RotationDegrees;
+		cameraRot.x = Mathf.Clamp(cameraRot.x, -89, 89);
+		_rotationHelper.RotationDegrees = cameraRot;
 	}
 }

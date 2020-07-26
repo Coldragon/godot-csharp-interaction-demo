@@ -1,26 +1,26 @@
 using Godot;
 using System;
 
-abstract public class TriggerOnOffItems : InteractiveItem
+public abstract class TriggerOnOffItems : InteractiveItem
 {	
-	[Export] public Godot.Collections.Array<NodePath> openable_items_path = new Godot.Collections.Array<NodePath>();
-	public Godot.Collections.Array<OnOffTriggerableItem> openable_items_nodes =  new Godot.Collections.Array<OnOffTriggerableItem>();
-	public bool _activated = false;
+	[Export] public Godot.Collections.Array<NodePath> OpenableItemsPath = new Godot.Collections.Array<NodePath>();
+	private readonly Godot.Collections.Array<OnOffTriggerableItem> _openableItemsNodes =  new Godot.Collections.Array<OnOffTriggerableItem>();
+	protected bool Activated = false;
 
 	public override void _Ready()
 	{
-		foreach(NodePath path in openable_items_path)
+		foreach(var path in OpenableItemsPath)
 		{
-			Node node = GetNode(path);
+			var node = GetNode(path);
 			if(node is OnOffTriggerableItem castnode)
-				openable_items_nodes.Add(castnode);
+				_openableItemsNodes.Add(castnode);
 		}
 	}
 
-	public void Switch()
+	protected void Switch()
 	{
-		_activated = !_activated;
-		foreach(OnOffTriggerableItem oi in openable_items_nodes)
+		Activated = !Activated;
+		foreach(var oi in _openableItemsNodes)
 			oi.IsOn = !oi.IsOn;
 	}
 }

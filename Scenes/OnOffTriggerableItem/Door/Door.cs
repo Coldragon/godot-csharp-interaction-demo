@@ -3,36 +3,29 @@ using System;
 
 public class Door : OnOffTriggerableItem
 {
-	Tween tw;
-	
-	[Export]
-	Vector3 openning_offset = new Vector3(2.0f, 0.0f, 0.0f);
-	Vector3 initial_position;
-	[Export]
-	float duration = 1.0f;
+	[Export] private Vector3 _openningOffset = new Vector3(2.0f, 0.0f, 0.0f);
+	private Vector3 _initialPosition;
+	[Export] private float _duration = 1.0f;
+	private Tween _tw;
 	
 	public override void _Ready()
 	{
-		tw = GetNode<Tween>("Tween");
-		initial_position = Transform.origin;
+		_tw = GetNode<Tween>("Tween");
+		_initialPosition = Transform.origin;
 		IsOn = IsOn;
 	}
 
-	public override void On()
+	protected override void On()
 	{
-		if(tw != null)
-		{
-			tw.InterpolateProperty(this, "transform:origin", Transform.origin, initial_position+openning_offset, duration);
-			tw.Start();
-		}
+		if (_tw == null) return;
+		_tw.InterpolateProperty(this, "transform:origin", Transform.origin, _initialPosition+_openningOffset, _duration);
+		_tw.Start();
 	}
 
-	public override void Off()
+	protected override void Off()
 	{
-		if(tw != null)
-		{
-			tw.InterpolateProperty(this, "transform:origin", Transform.origin, initial_position, duration);
-			tw.Start();
-		}
+		if (_tw == null) return;
+		_tw.InterpolateProperty(this, "transform:origin", Transform.origin, _initialPosition, _duration);
+		_tw.Start();
 	}
 }

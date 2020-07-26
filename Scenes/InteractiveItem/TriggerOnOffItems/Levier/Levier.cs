@@ -3,14 +3,14 @@ using System;
 
 public class Levier : TriggerOnOffItems
 {
-	AnimationPlayer ap;
-	OmniLight ol;
+	private AnimationPlayer _ap;
+	private OmniLight _ol;
 	
 	public override void _Ready()
 	{
 		base._Ready();
-		ap = GetNode<AnimationPlayer>("AnimationPlayer");
-		ol = GetNode<OmniLight>("OmniLight");
+		_ap = GetNode<AnimationPlayer>("AnimationPlayer");
+		_ol = GetNode<OmniLight>("OmniLight");
 	}
 	
 	public override void Interact(Player player)
@@ -18,22 +18,18 @@ public class Levier : TriggerOnOffItems
 		Switch();
 		Animate();
 	}
-	
-	public void Animate()
+
+	private void Animate()
 	{
-		if(_activated)
+		if(Activated)
 		{
-			ap.Play("Activate");
-			ol.LightColor = Colors.Green;
-			Color col = Colors.Green;
-			col.a = 0.5f;
+			_ap.Play("Activate");
+			_ol.LightColor = Colors.Green;
 		}
 		else
 		{
-			ap.PlayBackwards("Activate");
-			ol.LightColor = Colors.Red;
-			Color col = Colors.Red;
-			col.a = 0.5f;
+			_ap.PlayBackwards("Activate");
+			_ol.LightColor = Colors.Red;
 		}
 	}
 }

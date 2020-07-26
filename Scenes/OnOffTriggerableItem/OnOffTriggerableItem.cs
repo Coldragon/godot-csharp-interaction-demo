@@ -1,21 +1,22 @@
 using Godot;
 using System;
 
-abstract public class OnOffTriggerableItem : Spatial
+public abstract class OnOffTriggerableItem : Spatial
 {
-	private bool is_on = false;
+	private bool _isOn = false;
 	[Export] public bool IsOn
 	{
-		get {return is_on;}
-		set{
-			is_on = value;
-			if(is_on)
+		get => _isOn;
+		set
+		{
+			_isOn = value;
+			if (_isOn)
 				On();
 			else
 				Off();
-			}
+		}
 	}
 
-	abstract public void On();
-	abstract public void Off();
+	protected abstract void On();
+	protected abstract void Off();
 }

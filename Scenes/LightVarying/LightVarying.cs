@@ -3,51 +3,49 @@ using System;
 
 public class LightVarying : Godot.Spatial
 {
-	private Color current_color = new Color(1.0f,0.0f,0.0f,1.0f);
+	private Color _currentColor = new Color(1.0f,0.0f,0.0f,1.0f);
 	[Export]
 	public Color CurrentColor
 	{
-		get {return current_color;}
+		get => _currentColor;
 		set{
-			current_color = value;
+			_currentColor = value;
 			UpdateColor();
 		}
 	}
 	
-	private OmniLight light;
-	private Particles particles;
+	private OmniLight _light;
+	private Particles _particles;
 	
 	private void UpdateColor()
 	{
-		if(particles != null && light != null)
+		if (_particles == null || _light == null) return;
+		var pm = _particles.DrawPass1 as PrimitiveMesh;
+		if (pm?.Material is SpatialMaterial sm) //check if pointer not null "?"
 		{
-			PrimitiveMesh pm = particles.DrawPass1 as PrimitiveMesh;
-			SpatialMaterial sm = pm.Material as SpatialMaterial;
-			
-			sm.AlbedoColor = current_color;
-			sm.Emission = current_color;
-			light.LightColor = current_color;
+			sm.AlbedoColor = _currentColor;
+			sm.Emission = _currentColor;
 		}
+		_light.LightColor = _currentColor;
 	}
 
-	public void DuplicateRessources()
+	private void DuplicateRessources()
 	{
-		particles.ProcessMaterial = particles.ProcessMaterial.Duplicate() as ParticlesMaterial;
-		particles.DrawPass1 = particles.DrawPass1.Duplicate() as Mesh;
-		PrimitiveMesh pm = particles.DrawPass1 as PrimitiveMesh;
-		pm.Material = pm.Material.Duplicate() as Material;
+		_particles.ProcessMaterial = _particles.ProcessMaterial.Duplicate() as ParticlesMaterial;
+		_particles.DrawPass1 = _particles.DrawPass1.Duplicate() as Mesh;
+		if (_particles.DrawPass1 is PrimitiveMesh pm) pm.Material = pm.Material.Duplicate() as Material;
 	}
 
 	public override void _Ready()
 	{
-		light = GetNode<OmniLight>("OmniLight");
-		particles = GetNode<Particles>("Particles");
+		_light = GetNode<OmniLight>("OmniLight");
+		_particles = GetNode<Particles>("Particles");
 		DuplicateRessources();
 		UpdateColor();
 	}
 	
 	public override void _Process(float delta)
 	{
-		light.LightEnergy = 1.0f + (Mathf.Sin(OS.GetTicksMsec()/150.0f))/8.0f;
+		_light.LightEnergy = 1.0f + (Mathf.Sin(OS.GetTicksMsec()/150.0f))/8.0f;
 	}
 }
